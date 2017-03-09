@@ -20,7 +20,7 @@
     group: "{{ opdk_group_name }}"
     owner: "{{ opdk_user_name }}"
     mode: 0644
-    state: present
+    state: file
 
 - name: Update message-processor.properties file
   lineinfile:
