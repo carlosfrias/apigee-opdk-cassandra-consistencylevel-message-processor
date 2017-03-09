@@ -14,16 +14,9 @@
   set_fact:
     file_name: "{{ apigee_installation_home }}/customer/application/{{ property_file }}.properties"
 
-- name: Create file if it doesn't exist
-  file:
-    path: "{{ file_name }}"
-    group: "{{ opdk_group_name }}"
-    owner: "{{ opdk_user_name }}"
-    mode: 0644
-    state: touch
-
 - name: Update message-processor.properties file
   lineinfile:
+    create: yes
     group: "{{ opdk_group_name }}"
     owner: "{{ opdk_user_name }}"
     mode: 0644
