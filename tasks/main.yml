@@ -5,6 +5,11 @@
     msg: "Please provide consistencylevel"
   when: consistencylevel is not defined
 
+- name: Validate that property_file is available
+  fail:
+    msg: "Please provide property_file name"
+  when: property_file is not defined
+
 - name: Update message-processor.properties file
   lineinfile:
     create: true
@@ -14,7 +19,7 @@
     state: present
     regexp: "^{{ item }}"
     line: "{{ item }}={{ consistency_level }}"
-    path: "{{ apigee_installation_home }}/customer/application/message-processor.properties"
+    path: "{{ apigee_installation_home }}/customer/application/{{ property_file }}.properties"
   with_items:
   - "conf_counter_write.consistencylevel"
   - "conf_counter_read.consistencylevel"
