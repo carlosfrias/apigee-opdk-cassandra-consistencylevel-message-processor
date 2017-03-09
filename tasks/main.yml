@@ -1,0 +1,40 @@
+---
+# tasks file for apigee-opdk-edge-message-processor-consistencylevel
+- name: Validate that consistencylevel is available
+  fail:
+    msg: "Please provide consistencylevel"
+  when: consistencylevel is not defined
+
+- name: Update message-processor.properties file
+  lineinfile:
+    create: true
+    group: "{{ opdk_group_name }}"
+    owner: "{{ opdk_user_name }}"
+    mode: 0644
+    state: present
+    regexp: "^{{ item }}"
+    line: "{{ item }}={{ consistency_level }}"
+    path: "{{ apigee_installation_home }}/customer/application/message-processor.properties"
+  with_items:
+  - "conf_counter_write.consistencylevel"
+  - "conf_counter_read.consistencylevel"
+  - "conf_keyvaluemap-datastore_read.consistencylevel"
+  - "conf_keyvaluemap-datastore_write.consistencylevel"
+  - "conf_keyvaluemap-datastore-config_read.consistencylevel"
+  - "conf_keyvaluemap-datastore-config_write.consistencylevel"
+  - "conf_scheduler_write.consistencylevel"
+  - "conf_scheduler_read.consistencylevel"
+  - "conf_audit_consistencylevel"
+  - "conf_repository_cassandra.defaults.read.consistencylevel"
+  - "conf_repository_cassandra.defaults.write.consistencylevel"
+  - "conf_repository_cassandra.defaults.consistencylevel"
+  - "conf_aries_consistencylevel"
+  - "conf_apimodel_write.consistencylevel"
+  - "conf_apimodel_read.consistencylevel"
+  - "conf_edge-notification_write.consistencylevel"
+  - "conf_edge-notification_read.consistencylevel"
+  - "conf_developer-datastore_write.consistencylevel"
+  - "conf_developer_datastore_read.consistencylevel"
+  - "conf_keymanagement-datastore-config_read.consistencylevel"
+  - "conf_keymanagement-datastore-config_write.consistencylevel"
+  - "conf_keymanagement-datastore-config_consistencylevel"
