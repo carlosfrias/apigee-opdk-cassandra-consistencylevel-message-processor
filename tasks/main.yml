@@ -10,16 +10,27 @@
     msg: "Please provide property_file name"
   when: property_file is not defined
 
+- name: Construct property file name
+  set_facts:
+    file_name: "{{ apigee_installation_home }}/customer/application/{{ property_file }}.properties"
+
+- name: Create file if it doesn't exist
+  file:
+    path: "{{ file_name }}"
+    group: "{{ opdk_group_name }}"
+    owner: "{{ opdk_user_name }}"
+    mode: 0644
+    state: present
+
 - name: Update message-processor.properties file
   lineinfile:
-    create: true
     group: "{{ opdk_group_name }}"
     owner: "{{ opdk_user_name }}"
     mode: 0644
     state: present
     regexp: "^{{ item }}"
     line: "{{ item }}={{ consistency_level }}"
-    path: "{{ apigee_installation_home }}/customer/application/{{ property_file }}.properties"
+    path: "{{ file_name }}"
   with_items:
   - "conf_counter_write.consistencylevel"
   - "conf_counter_read.consistencylevel"
