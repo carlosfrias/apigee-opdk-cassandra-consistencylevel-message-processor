@@ -30,7 +30,7 @@
     state: present
     regexp: "^{{ item }}"
     line: "{{ item }}={{ consistency_level }}"
-    path: "{{ file_name }}"
+    dest: "{{ file_name }}"
   with_items:
   - "conf_counter_write.consistencylevel"
   - "conf_counter_read.consistencylevel"
