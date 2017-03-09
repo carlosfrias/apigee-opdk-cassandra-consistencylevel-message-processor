@@ -1,9 +1,9 @@
 ---
 # tasks file for apigee-opdk-edge-message-processor-consistencylevel
-- name: Validate that consistencylevel is available
+- name: Validate that consistency_level is available
   fail:
-    msg: "Please provide consistencylevel"
-  when: consistencylevel is not defined
+    msg: "Please provide consistency_level"
+  when: consistency_level is not defined
 
 - name: Validate that property_file is available
   fail:
