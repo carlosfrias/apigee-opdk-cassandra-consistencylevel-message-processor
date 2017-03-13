@@ -14,7 +14,7 @@
   set_fact:
     file_name: "{{ apigee_installation_home }}/customer/application/{{ property_file }}.properties"
 
-- name: Update message-processor.properties file
+- name: Update consistency level properties file
   lineinfile:
     create: yes
     group: "{{ opdk_group_name }}"
