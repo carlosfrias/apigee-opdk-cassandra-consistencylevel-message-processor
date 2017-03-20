@@ -16,6 +16,7 @@
 
 - name: Update consistency level properties file
   lineinfile:
+    backup: yes
     create: yes
     group: "{{ opdk_group_name }}"
     owner: "{{ opdk_user_name }}"
